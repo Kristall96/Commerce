@@ -4,7 +4,8 @@ import "./App.css";
 function App() {
   return (
     <>
-      <ThemeTest />
+      {/* <ThemeTest /> */}
+      <h1>Hellow From App</h1>
     </>
   );
 }
