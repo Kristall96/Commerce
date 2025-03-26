@@ -1,0 +1,27 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vh 1vw;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid #eaeaea;
+}
+.nav-links {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  gap: 5vw;
+  align-items: center;
+  padding: 0 10px;
+  cursor: pointer;
+  list-style: none;
+}
+nav ul li {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.logo {
+  width: 5vw;
+  cursor: pointer;
+}
