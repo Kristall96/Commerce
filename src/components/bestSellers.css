@@ -1,0 +1,17 @@
+.BestSellerDiv {
+  border-bottom: 1px solid #eaeaea;
+  padding: 0 0 3vh;
+}
+img {
+  width: 10%;
+}
+h2 {
+  text-align: center;
+  text-decoration: underline 1px;
+}
+.productDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3vw;
+}
