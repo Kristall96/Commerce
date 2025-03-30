@@ -1,0 +1,147 @@
+.profile-container {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.profile-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.profile-container p {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: #bbb;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.edit-form input {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #2c2c2c;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.edit-form button {
+  padding: 0.75rem 1rem;
+  background-color: #6a00ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.edit-form button:hover {
+  background-color: #8e2fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+table th,
+table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+table th {
+  color: #999;
+  font-weight: 500;
+}
+
+table td {
+  color: #ddd;
+}
+
+table button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+table button:hover {
+  background-color: #6a00ff;
+}
+.admin-toggle {
+  width: 50px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: #ff4d4d;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.admin-toggle.on {
+  background-color: #4caf50;
+}
+
+.admin-toggle .circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
+}
+
+.admin-toggle.on .circle {
+  transform: translateX(26px);
+}
+.edit-user-modal {
+  margin-top: 1rem;
+  background-color: #2a2a2a;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.edit-user-modal input {
+  display: block;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  background: #1e1e1e;
+  border: none;
+  color: white;
+  border-radius: 4px;
+}
+
+.edit-user-modal button {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #6a00ff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}

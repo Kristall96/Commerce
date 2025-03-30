@@ -13,9 +13,11 @@ function AccountModal({ onClose }) {
   const { login } = useContext(AuthContext);
   const API_BASE_URL = "http://localhost:5000";
 
+  // Step 1: Check email existence
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
     try {
       const res = await fetch(`${API_BASE_URL}/api/auth/check-email`, {
         method: "POST",
@@ -24,20 +26,25 @@ function AccountModal({ onClose }) {
       });
 
       const data = await res.json();
-      setIsExistingUser(data.exists);
-      setEmailChecked(true);
+
+      if (res.ok) {
+        setIsExistingUser(data.exists);
+        setEmailChecked(true);
+      } else {
+        setError(data.message || "Email check failed.");
+      }
     } catch (err) {
       console.error(err);
       setError("Server error. Try again.");
     }
   };
 
+  // Step 2: Login or Register
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     const endpoint = isExistingUser ? "login" : "register";
-
     const body = isExistingUser
       ? { email, password }
       : { email, password, username };
@@ -52,7 +59,9 @@ function AccountModal({ onClose }) {
       const data = await res.json();
 
       if (res.ok) {
-        login(data.user || { email, username });
+        // ✅ Store token and user
+        localStorage.setItem("token", data.token);
+        login(data.user, data.token); // make sure login in AuthContext supports this
         onClose();
       } else {
         setError(data.message || "Authentication failed.");

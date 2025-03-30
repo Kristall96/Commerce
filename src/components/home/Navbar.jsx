@@ -1,12 +1,18 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import AccountModal from "./AccountModal";
 import "./Navbar.css";
 
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/"); // ✅ redirect to homepage after logout
+  };
 
   return (
     <>
@@ -38,13 +44,11 @@ function Navbar() {
         <span>
           {user ? (
             <div className="user-dropdown">
-              <button>
-                <Link to="/profile" className="user-btn">
-                  {user.username}
-                </Link>
+              <button className="user-btn">
+                <Link to="/profile">{user.username}</Link>
               </button>
               <div className="dropdown-content">
-                <button onClick={logout}>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
               </div>
             </div>
           ) : (
