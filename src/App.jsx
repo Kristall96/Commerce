@@ -7,7 +7,6 @@ import Blog from "./pages/Blog";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
-
 import SingleProduct from "./components/singleProduct/SingleProduct";
 import "./App.css";
 
@@ -15,7 +14,6 @@ function App() {
   return (
     <>
       <Navbar />
-      <SingleProduct />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
