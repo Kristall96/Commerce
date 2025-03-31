@@ -1,5 +1,5 @@
 import React from "react";
-import AboutContent from "../components/about/AboutContent";
+import AboutContent from "../about/AboutContent";
 function About() {
   return (
     <>

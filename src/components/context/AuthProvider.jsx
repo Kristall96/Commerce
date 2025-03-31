@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
+import Spinner from "../ui/Spinner";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // ✅ On mount: restore user/token from localStorage
   useEffect(() => {
     try {
       const storedUser = localStorage.getItem("user");
@@ -15,28 +16,32 @@ const AuthProvider = ({ children }) => {
         setUser(parsedUser);
       }
     } catch (error) {
-      console.error("❌ Invalid stored user:", error);
+      console.error("Invalid stored user:", error);
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+    } finally {
+      setLoading(false);
     }
   }, []);
 
-  // ✅ Login function — set state & persist
   const login = (userData, token) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
     localStorage.setItem("token", token);
   };
 
-  // ✅ Logout — clear state & localStorage
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
   };
 
+  if (loading) {
+    return <Spinner fullscreen message="Checking authentication..." />;
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

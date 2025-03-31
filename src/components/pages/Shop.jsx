@@ -1,5 +1,5 @@
 import React from "react";
-import ShopContent from "../components/shop/ShopContent";
+import ShopContent from "../shop/ShopContent";
 function Shop() {
   return <ShopContent />;
 }

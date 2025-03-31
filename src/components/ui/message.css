@@ -1,0 +1,41 @@
+.message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  font-weight: 500;
+  max-width: 500px;
+  margin-inline: auto;
+  position: relative;
+}
+
+.message.info {
+  background-color: #007bff22;
+  color: #007bff;
+}
+
+.message.success {
+  background-color: #28a74522;
+  color: #28a745;
+  width: 10vw;
+}
+
+.message.error {
+  background-color: #dc354522;
+  color: #dc3545;
+}
+
+.message button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 1rem;
+  line-height: 1;
+  font-weight: bold;
+  opacity: 0.6;
+}

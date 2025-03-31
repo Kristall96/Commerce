@@ -145,3 +145,33 @@ table button:hover {
   border-radius: 4px;
   cursor: pointer;
 }
+.error-message {
+  margin-top: 8px;
+  margin-bottom: 10px;
+  background-color: #511;
+  color: #f88;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+}
+.spinner {
+  margin: 2rem auto;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #999;
+  border-top: 4px solid #6e00ff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}

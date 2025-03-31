@@ -50,9 +50,9 @@ function Footer() {
 
       <div className="footer-bottom">
         <p>
-          © {new Date().getFullYear()} 2025 MugMarvel Store. All rights
-          reserved.
+          © {new Date().getFullYear()} MugMarvel Store. All rights reserved.
         </p>
+        <p>SoftUni - Project</p>
       </div>
     </footer>
   );

@@ -1,18 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import AccountModal from "./AccountModal";
 import "./Navbar.css";
 
 function Navbar() {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/"); // ✅ redirect to homepage after logout
-  };
 
   return (
     <>
@@ -47,9 +41,6 @@ function Navbar() {
               <button className="user-btn">
                 <Link to="/profile">{user.username}</Link>
               </button>
-              <div className="dropdown-content">
-                <button onClick={handleLogout}>Logout</button>
-              </div>
             </div>
           ) : (
             <button onClick={() => setShowModal(true)}>Account</button>
