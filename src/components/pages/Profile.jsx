@@ -4,6 +4,7 @@ import Message from "../ui/Message";
 import "./Profile.css";
 
 const Profile = () => {
+  const BASE_URL = import.meta.env.VITE_API_URL;
   const { user, login, logout } = useContext(AuthContext);
   const [editError, setEditError] = useState("");
 
@@ -35,7 +36,7 @@ const Profile = () => {
   const fetchAllUsers = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/users", {
+      const res = await fetch("${BASE_URL}/api/users", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -63,7 +64,7 @@ const Profile = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/users/profile", {
+      const res = await fetch("${BASE_URL}/api/users/profile", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -107,17 +108,14 @@ const Profile = () => {
 
   const handleToggleAdmin = async (userId, makeAdmin) => {
     try {
-      const res = await fetch(
-        `http://localhost:5000/api/users/${userId}/make-admin`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({ makeAdmin }),
-        }
-      );
+      const res = await fetch(`${BASE_URL}/api/users/${userId}/make-admin`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ makeAdmin }),
+      });
 
       const data = await res.json();
       if (res.ok) {
@@ -139,7 +137,7 @@ const Profile = () => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
+      const res = await fetch(`${BASE_URL}/api/users/${userId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -161,17 +159,14 @@ const Profile = () => {
     try {
       setEditError("");
 
-      const res = await fetch(
-        `http://localhost:5000/api/users/${editingUser}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(editForm),
-        }
-      );
+      const res = await fetch(`${BASE_URL}/api/users/${editingUser}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(editForm),
+      });
 
       let data;
       try {

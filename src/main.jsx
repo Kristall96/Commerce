@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./components/context/AuthProvider";
-import Root from "./Root"; // ✅ use the external Root component
+import Root from "./Root";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

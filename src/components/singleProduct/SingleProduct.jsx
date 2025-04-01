@@ -5,7 +5,6 @@ import "./SingleProduct.css";
 function SingleProduct() {
   const { id } = useParams();
 
-  // Dummy product data (ideally this would come from a fetch or context)
   const productData = {
     "galaxy-mug": {
       name: "Galaxy Mug",

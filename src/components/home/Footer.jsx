@@ -11,13 +11,11 @@ import "./footer.css";
 function Footer() {
   return (
     <footer className="footer">
-      {/* Branding / Logo */}
       <div className="footer-brand">
         <h2>MugMarvel</h2>
         <p>Your daily dose of mug magic </p>
       </div>
 
-      {/* Navigation Links */}
       <div className="footer-links">
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
@@ -25,7 +23,6 @@ function Footer() {
         <a href="/terms">Terms</a>
       </div>
 
-      {/* Social Icons */}
       <div className="footer-socials">
         <a href="https://instagram.com" target="_blank" rel="noreferrer">
           <FaInstagram />

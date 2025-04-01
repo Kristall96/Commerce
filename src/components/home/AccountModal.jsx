@@ -11,15 +11,14 @@ function AccountModal({ onClose }) {
   const [error, setError] = useState("");
 
   const { login } = useContext(AuthContext);
-  const API_BASE_URL = "http://localhost:5000";
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
-  // Step 1: Check email existence
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/auth/check-email`, {
+      const res = await fetch(`${BASE_URL}/api/auth/check-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -39,7 +38,6 @@ function AccountModal({ onClose }) {
     }
   };
 
-  // Step 2: Login or Register
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -50,7 +48,7 @@ function AccountModal({ onClose }) {
       : { email, password, username };
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/auth/${endpoint}`, {
+      const res = await fetch(`${BASE_URL}/api/auth/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -59,9 +57,8 @@ function AccountModal({ onClose }) {
       const data = await res.json();
 
       if (res.ok) {
-        // ✅ Store token and user
         localStorage.setItem("token", data.token);
-        login(data.user, data.token); // make sure login in AuthContext supports this
+        login(data.user, data.token);
         onClose();
       } else {
         setError(data.message || "Authentication failed.");

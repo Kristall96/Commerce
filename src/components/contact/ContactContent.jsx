@@ -13,7 +13,6 @@ function Contact() {
       </section>
 
       <div className="contact-content">
-        {/* Contact Form */}
         <form className="contact-form">
           <label>
             Name
@@ -34,7 +33,6 @@ function Contact() {
           <button type="submit">Send Message</button>
         </form>
 
-        {/* Contact Info */}
         <div className="contact-info">
           <h3>Contact Info</h3>
           <p>
