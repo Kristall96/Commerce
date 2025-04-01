@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Message from "../ui/Message";
 import "./Profile.css";
-
+const BASE_URL = import.meta.env.VITE_API_URL;
 const Profile = () => {
-  const BASE_URL = import.meta.env.VITE_API_URL;
   const { user, login, logout } = useContext(AuthContext);
   const [editError, setEditError] = useState("");
 
