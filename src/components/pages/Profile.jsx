@@ -35,7 +35,7 @@ const Profile = () => {
   const fetchAllUsers = async () => {
     try {
       setLoading(true);
-      const res = await fetch("${BASE_URL}/api/users", {
+      const res = await fetch(`${BASE_URL}/api/users`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -63,7 +63,7 @@ const Profile = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("${BASE_URL}/api/users/profile", {
+      const res = await fetch(`${BASE_URL}/api/users/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
