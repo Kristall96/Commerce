@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StarRating from "../ui/StarRating";
-import "./ProductCard.css";
+import "./productCard.css";
 
 const ProductCard = ({ product }) => {
   const [localRatings, setLocalRatings] = useState(product.ratings || []);

@@ -1,65 +1,61 @@
-.product-page {
+.single-product-container {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  max-width: 1000px;
-  margin: 3rem auto;
   padding: 2rem;
-  font-family: "Segoe UI", sans-serif;
+  color: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.product-image {
-  flex: 1;
-  min-width: 300px;
-  max-width: 450px;
-  border-radius: 12px;
-  object-fit: cover;
-  width: 100%;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+.single-image {
+  flex: 1 1 300px;
+  max-width: 400px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #1e1e1e;
+  padding: 1rem;
 }
 
-.product-details {
-  flex: 1;
-  min-width: 300px;
+.single-details {
+  flex: 2;
 }
 
-.product-details h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.price {
+  font-size: 1.6rem;
+  color: #bb86fc;
+  margin: 0.5rem 0;
 }
 
-.product-price {
-  font-size: 1.5rem;
-  color: #7b2ff7;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.product-desc {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 2rem;
+.desc {
+  margin: 1rem 0;
   line-height: 1.6;
+  color: #ccc;
 }
 
-.add-to-cart-btn {
-  padding: 0.8rem 1.5rem;
-  background: #7b2ff7;
+.product-meta {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.product-meta li {
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.add-cart-btn {
+  background: #8a2be2;
   color: white;
-  border: none;
+  padding: 0.7rem 1.4rem;
   font-size: 1rem;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.3s ease;
+  box-shadow: 0 0 8px rgba(138, 43, 226, 0.4);
 }
 
-.add-to-cart-btn:hover {
-  background: #621fd5;
-}
-
-@media (max-width: 768px) {
-  .product-page {
-    flex-direction: column;
-    align-items: center;
-  }
+.add-cart-btn:hover {
+  background: #a74fff;
 }
