@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Message from "../ui/Message";
 import "./Profile.css";
-import { BASE_URL } from "./api/config";
+import { BASE_URL } from "../../api/config.js";
 const Profile = () => {
   const { user, login, logout } = useContext(AuthContext);
   const [editError, setEditError] = useState("");
