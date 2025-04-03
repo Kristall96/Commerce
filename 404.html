@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Redirecting...</title>
-    <script>
-      // Save the attempted route and redirect to root
-      sessionStorage.redirect = location.pathname;
-      window.location.href = "/";
-    </script>
+    <title>Single Page App</title>
   </head>
-  <body></body>
+  <body>
+    <script>
+      sessionStorage.redirect = location.pathname + location.search;
+      window.location.replace("/");
+    </script>
+  </body>
 </html>
