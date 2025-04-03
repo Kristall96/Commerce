@@ -1,27 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StarRating from "../ui/StarRating";
 import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
   const [localRatings, setLocalRatings] = useState(product.ratings || []);
-  const [rated, setRated] = useState(false); // block re-rating in session
+  const [rated, setRated] = useState(false);
 
-  // 🧠 Calculate average rating
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
+
+  // ✅ Check if user already rated this product
+  useEffect(() => {
+    if (user?._id && product.ratings?.length > 0) {
+      const alreadyRated = product.ratings.some(
+        (r) => r.user === user._id || r.user?._id === user._id
+      );
+      setRated(alreadyRated);
+    }
+  }, [product.ratings, user]);
+
   const averageRating =
     localRatings.length > 0
-      ? localRatings.reduce((acc, r) => acc + r.score, 0) / localRatings.length
+      ? (
+          localRatings.reduce((acc, r) => acc + r.score, 0) /
+          localRatings.length
+        ).toFixed(1)
       : 0;
 
-  // 🟡 Handle user rating
   const handleRate = async (score) => {
-    if (rated) return alert("You've already rated this product.");
-
-    const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!token || !user?._id) {
-      return alert("You must be logged in to rate.");
-    }
+    if (rated) return alert("You’ve already rated this product.");
+    if (!token || !user?._id) return alert("Please log in to rate.");
 
     try {
       const res = await fetch(
@@ -35,7 +43,7 @@ const ProductCard = ({ product }) => {
           body: JSON.stringify({
             score,
             userId: user._id,
-            comment: "", // Optional comment, can be enhanced later
+            comment: "",
           }),
         }
       );
@@ -43,10 +51,10 @@ const ProductCard = ({ product }) => {
       const data = await res.json();
 
       if (res.ok) {
-        setLocalRatings((prev) => [...prev, { score }]);
+        setLocalRatings((prev) => [...prev, { score, user: user._id }]);
         setRated(true);
       } else {
-        alert(data.message || "Failed to submit rating.");
+        alert(data.message || "Rating failed.");
       }
     } catch (err) {
       console.error("Rating error:", err);
@@ -60,11 +68,10 @@ const ProductCard = ({ product }) => {
       <h3 className="product-title">{product.title}</h3>
       <p className="product-price">${product.price}</p>
 
-      {/* ⭐ Rating UI (clickable) */}
       <StarRating
         rating={averageRating}
         onRate={handleRate}
-        interactive={!rated}
+        interactive={!!user && !rated}
       />
 
       <div className="product-actions">
