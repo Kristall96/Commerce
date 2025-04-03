@@ -1,84 +1,45 @@
 .shop-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-  font-family: "Segoe UI", sans-serif;
-  color: #333;
-}
-
-.shop-title {
-  text-align: center;
-  font-size: 3rem;
-  color: #7b2ff7;
-  margin-bottom: 0.5rem;
-}
-
-.shop-subtitle {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 3rem;
+  padding: 2rem;
+  color: #fff;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
 }
 
 .product-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  padding: 1.5rem;
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 1rem;
   text-align: center;
-  transition: transform 0.2s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 .product-card img {
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
 }
 
-.product-card h3 {
-  font-size: 1.2rem;
-  margin: 1rem 0 0.5rem;
-  color: #333;
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
-.price {
-  color: #7b2ff7;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.buy-btn {
-  padding: 0.6rem 1.4rem;
+.pagination button {
+  padding: 0.5rem 1rem;
   border: none;
-  background: #7b2ff7;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 1rem;
+  background: #333;
+  color: white;
   cursor: pointer;
-  transition: background 0.2s;
+  border-radius: 5px;
 }
 
-.buy-btn:hover {
-  background: #621fd5;
-}
-
-@media (max-width: 600px) {
-  .shop-title {
-    font-size: 2rem;
-  }
-
-  .shop-subtitle {
-    font-size: 1rem;
-  }
+.pagination .active {
+  background: #8a2be2;
 }
