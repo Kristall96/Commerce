@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/home/Navbar";
 import Footer from "./components/home/Footer";
 import Home from "./components/pages/Home";
@@ -14,6 +14,16 @@ import SingleProduct from "./components/singleProduct/SingleProduct";
 import "./App.css";
 
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const redirect = sessionStorage.redirect;
+    if (redirect) {
+      sessionStorage.removeItem("redirect");
+      navigate(redirect, { replace: true });
+    }
+  }, [navigate]);
+
   return (
     <>
       <Navbar />
@@ -24,7 +34,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/product/:id" element={<SingleProduct />} />{" "}
+          <Route path="/product/:id" element={<SingleProduct />} />
           <Route path="/profile" element={<PrivateRoute />}>
             <Route index element={<Profile />} />
           </Route>
