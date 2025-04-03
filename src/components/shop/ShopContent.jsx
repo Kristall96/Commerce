@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import ProductCard from "./ProductCard";
 import { BASE_URL } from "../../api/config";
-import "./ShopContent.css"; // Optional: create this for styling
+import "./ShopContent.css";
 
 const ShopContent = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,7 @@ const ShopContent = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const limit = 25; // Show 25 mugs per page
+  const limit = 25;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -46,16 +47,12 @@ const ShopContent = () => {
       ) : error ? (
         <p className="error">{error}</p>
       ) : products.length === 0 ? (
-        <p>No mugs found.</p>
+        <p className="empty-message">🫙 No mugs matched your criteria ☕</p>
       ) : (
         <>
           <div className="product-grid">
             {products.map((product) => (
-              <div className="product-card" key={product._id}>
-                <img src={product.image} alt={product.title} />
-                <h3>{product.title}</h3>
-                <p>${product.price}</p>
-              </div>
+              <ProductCard key={product._id} product={product} />
             ))}
           </div>
 
