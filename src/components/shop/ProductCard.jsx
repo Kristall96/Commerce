@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import StarRating from "../ui/StarRating";
 import "./productCard.css";
 
@@ -63,21 +64,31 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="product-card">
-      <img src={product.image} alt={product.title} className="product-image" />
-      <h3 className="product-title">{product.title}</h3>
-      <p className="product-price">${product.price}</p>
+    <div className="product-card-wrapper">
+      <Link to={`/product/${product._id}`} className="product-card-link">
+        <div className="product-card">
+          <img
+            src={product.images?.[0]}
+            alt={product.title}
+            className="product-image"
+          />
 
-      <StarRating
-        rating={averageRating}
-        onRate={handleRate}
-        interactive={!!user && !rated}
-      />
+          <h3 className="product-title">{product.title}</h3>
+          <p className="product-price">${product.price}</p>
 
-      <div className="product-actions">
-        <button className="wishlist-btn">♡ Wishlist</button>
-        <button className="cart-btn">+ Add to Cart</button>
-      </div>
+          <StarRating
+            rating={averageRating}
+            onRate={handleRate}
+            interactive={!!user && !rated}
+          />
+
+          {/* Action buttons */}
+          <div className="product-actions" onClick={(e) => e.preventDefault()}>
+            <button className="wishlist-btn">♡ Wishlist</button>
+            <button className="cart-btn">+ Add to Cart</button>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 };

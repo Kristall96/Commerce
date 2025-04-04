@@ -86,3 +86,16 @@
 .cart-btn:hover {
   background: #a74fff;
 }
+.product-card-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+.product-card-wrapper {
+  position: relative;
+}
+
+.product-actions button {
+  pointer-events: auto;
+}
