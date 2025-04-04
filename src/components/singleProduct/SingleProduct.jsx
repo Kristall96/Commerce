@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../api/config";
 import StarRating from "../ui/StarRating";
+import { useCart } from "../context/CartContext"; // ✅ import context
 import "./SingleProduct.css";
 
 const SingleProduct = () => {
   const { id } = useParams();
+  const { addToCart } = useCart(); // ✅ get addToCart from context
+
   const [product, setProduct] = useState(null);
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState(""); // ✅ UI feedback message
 
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
@@ -32,6 +36,18 @@ const SingleProduct = () => {
     };
     fetchProduct();
   }, [id]);
+
+  const handleAddToCart = async () => {
+    if (!token) return alert("Please login to add items to your cart.");
+    try {
+      await addToCart(product._id, 1); // ✅ call context function
+      setFeedback("✅ Added to cart!");
+      setTimeout(() => setFeedback(""), 3000);
+    } catch (err) {
+      console.error("Add to cart error:", err);
+      setFeedback("❌ Failed to add to cart.");
+    }
+  };
 
   const handleCommentSubmit = async () => {
     if (!user || !token) return alert("Please log in to comment.");
@@ -135,9 +151,13 @@ const SingleProduct = () => {
           </p>
 
           <div className="product-buttons">
-            <button className="cart-btn">+ Add to Cart</button>
+            <button className="cart-btn" onClick={handleAddToCart}>
+              + Add to Cart
+            </button>
             <button className="wishlist-btn">♡ Add to Wishlist</button>
           </div>
+
+          {feedback && <p className="cart-feedback">{feedback}</p>}
         </div>
       </div>
 
@@ -158,10 +178,9 @@ const SingleProduct = () => {
             Submit Review
           </button>
         </div>
-        <div>
-          <h4>Customer Reviews</h4>
-        </div>
+
         <div className="comments-wrapper">
+          <h4>Customer Reviews</h4>
           <div className="existing-comments">
             {product.ratings.length === 0 ? (
               <p>No reviews yet.</p>

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import StarRating from "../ui/StarRating";
+import { useCart } from "../context/CartContext"; // ✅ import
 import "./productCard.css";
 
 const ProductCard = ({ product }) => {
   const [localRatings, setLocalRatings] = useState(product.ratings || []);
   const [rated, setRated] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
+  const { addToCart } = useCart(); // ✅ access cart context
 
-  // ✅ Check if user already rated this product
+  // ✅ Check if user already rated
   useEffect(() => {
     if (user?._id && product.ratings?.length > 0) {
       const alreadyRated = product.ratings.some(
@@ -50,7 +53,6 @@ const ProductCard = ({ product }) => {
       );
 
       const data = await res.json();
-
       if (res.ok) {
         setLocalRatings((prev) => [...prev, { score, user: user._id }]);
         setRated(true);
@@ -63,6 +65,19 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const handleAddToCart = async (e) => {
+    e.preventDefault();
+    if (!token) return alert("Please log in to add to cart.");
+    try {
+      await addToCart(product._id, 1);
+      setFeedback("✅ Added to cart");
+      setTimeout(() => setFeedback(""), 2500);
+    } catch (err) {
+      console.error("Add to cart error:", err);
+      setFeedback("❌ Failed to add to cart");
+    }
+  };
+
   return (
     <div className="product-card-wrapper">
       <Link to={`/product/${product._id}`} className="product-card-link">
@@ -72,7 +87,6 @@ const ProductCard = ({ product }) => {
             alt={product.title}
             className="product-image"
           />
-
           <h3 className="product-title">{product.title}</h3>
           <p className="product-price">${product.price}</p>
 
@@ -82,10 +96,12 @@ const ProductCard = ({ product }) => {
             interactive={!!user && !rated}
           />
 
-          {/* Action buttons */}
           <div className="product-actions" onClick={(e) => e.preventDefault()}>
             <button className="wishlist-btn">♡ Wishlist</button>
-            <button className="cart-btn">+ Add to Cart</button>
+            <button className="cart-btn" onClick={handleAddToCart}>
+              + Add to Cart
+            </button>
+            {feedback && <p className="cart-feedback">{feedback}</p>}
           </div>
         </div>
       </Link>

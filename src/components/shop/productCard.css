@@ -99,3 +99,9 @@
 .product-actions button {
   pointer-events: auto;
 }
+.cart-feedback {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #8a2be2;
+  font-weight: 500;
+}

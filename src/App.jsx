@@ -11,13 +11,15 @@ import Profile from "./components/pages/Profile";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import NotFound from "./components/pages/NotFound";
 import SingleProduct from "./components/singleProduct/SingleProduct";
+import Cart from "./components/pages/CartContext"; // ✅ Ensure this path is correct
+import { CartProvider } from "./components/context/CartContext"; // ✅ Wraps all for cart access
 import "./App.css";
 
 function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const redirect = sessionStorage.redirect;
+    const redirect = sessionStorage.getItem("redirect");
     if (redirect) {
       sessionStorage.removeItem("redirect");
       navigate(redirect, { replace: true });
@@ -25,7 +27,7 @@ function App() {
   }, [navigate]);
 
   return (
-    <>
+    <CartProvider>
       <Navbar />
       <main>
         <Routes>
@@ -35,6 +37,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/product/:id" element={<SingleProduct />} />
+          <Route path="/cart" element={<Cart />} /> {/* ✅ Cart page */}
           <Route path="/profile" element={<PrivateRoute />}>
             <Route index element={<Profile />} />
           </Route>
@@ -42,7 +45,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
-    </>
+    </CartProvider>
   );
 }
 
