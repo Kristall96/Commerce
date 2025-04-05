@@ -1,0 +1,129 @@
+/* Best Sellers Section */
+.best-sellers-section {
+  padding: 2rem 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.best-sellers-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Grid Layout: 7 equal columns */
+.seven-column-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem; /* tighter spacing */
+  padding: 0 1rem;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Product card wrapper (from ProductCard.jsx) */
+.product-card-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+/* Product card styling */
+.product-card {
+  background: #1e1e1e;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  height: 100%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Product image */
+.product-image {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+  border-radius: 6px;
+}
+
+/* Product title and price */
+.product-title {
+  font-size: 0.95rem;
+  margin: 0.3rem 0;
+}
+
+.product-price {
+  color: #bb86fc;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+/* Star rating */
+.star-rating {
+  margin: 0.5rem 0;
+  font-size: 1.3rem;
+  user-select: none;
+}
+
+.star-rating span {
+  pointer-events: auto;
+  transition: color 0.2s ease;
+}
+
+/* Action buttons */
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.wishlist-btn,
+.cart-btn {
+  background: #8a2be2;
+  color: white;
+  padding: 0.45rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.wishlist-btn.in-wishlist {
+  background: #b91c1c;
+}
+
+.wishlist-btn:hover,
+.cart-btn:hover {
+  background: #a74fff;
+}
+
+.cart-feedback {
+  font-size: 0.85rem;
+  color: #8a2be2;
+  font-weight: 500;
+  margin-top: 0.3rem;
+}
+
+/* ProductCard link wrapper */
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
