@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../api/config";
 import StarRating from "../ui/StarRating";
-import { useCart } from "../context/CartContext"; // ✅ import context
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 import "./SingleProduct.css";
 
 const SingleProduct = () => {
   const { id } = useParams();
-  const { addToCart } = useCart(); // ✅ get addToCart from context
+  const { addToCart } = useCart();
+  const { wishlist, toggleWishlist } = useWishlist();
 
   const [product, setProduct] = useState(null);
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [error, setError] = useState("");
-  const [feedback, setFeedback] = useState(""); // ✅ UI feedback message
+  const [feedback, setFeedback] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
@@ -40,7 +42,7 @@ const SingleProduct = () => {
   const handleAddToCart = async () => {
     if (!token) return alert("Please login to add items to your cart.");
     try {
-      await addToCart(product._id, 1); // ✅ call context function
+      await addToCart(product._id, 1);
       setFeedback("✅ Added to cart!");
       setTimeout(() => setFeedback(""), 3000);
     } catch (err) {
@@ -49,10 +51,21 @@ const SingleProduct = () => {
     }
   };
 
+  const handleWishlistToggle = async () => {
+    if (!token) return alert("Please login to use wishlist.");
+    try {
+      await toggleWishlist(product._id);
+      setFeedback("❤️ Wishlist updated!");
+      setTimeout(() => setFeedback(""), 3000);
+    } catch (err) {
+      console.error("Wishlist error:", err);
+      setFeedback("❌ Failed to update wishlist.");
+    }
+  };
+
   const handleCommentSubmit = async () => {
     if (!user || !token) return alert("Please log in to comment.");
-    if (!rating || !comment.trim())
-      return alert("Please provide both a rating and a comment.");
+    if (!rating || !comment.trim()) return alert("Please rate and comment.");
 
     try {
       const res = await fetch(
@@ -99,6 +112,7 @@ const SingleProduct = () => {
       : "No ratings";
 
   const mainImage = product.images?.[mainImageIndex] || "";
+  const isInWishlist = wishlist.some((item) => item._id === product._id);
 
   return (
     <>
@@ -109,7 +123,6 @@ const SingleProduct = () => {
             alt="Main Product"
             className="main-product-image"
           />
-
           <div className="thumbnail-list">
             {product.images?.map((img, idx) => (
               <img
@@ -154,7 +167,12 @@ const SingleProduct = () => {
             <button className="cart-btn" onClick={handleAddToCart}>
               + Add to Cart
             </button>
-            <button className="wishlist-btn">♡ Add to Wishlist</button>
+            <button
+              className={`wishlist-btn ${isInWishlist ? "in-wishlist" : ""}`}
+              onClick={handleWishlistToggle}
+            >
+              {isInWishlist ? "♥ Remove Wishlist" : "♡ Add to Wishlist"}
+            </button>
           </div>
 
           {feedback && <p className="cart-feedback">{feedback}</p>}

@@ -1,0 +1,242 @@
+/* General Styles */
+.blog-container,
+.blog-single-container {
+  background-color: #121212;
+  padding: 3rem 2rem;
+  min-height: 90vh;
+  color: white;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #bb86fc, #8a2be2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Blog List */
+.blog-title {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.blog-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #bbb;
+  margin-bottom: 3rem;
+}
+
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* Blog Card */
+.blog-card {
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.15);
+}
+
+.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(138, 43, 226, 0.35);
+}
+
+.blog-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.fancy-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.3rem;
+  transition: color 0.3s ease;
+}
+
+.fancy-title:hover {
+  color: #bb86fc;
+  text-decoration: underline;
+}
+
+.blog-date {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+}
+
+.fancy-excerpt {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* Read More Button */
+.read-more-btn {
+  padding: 0.5rem 1rem;
+  background: #8a2be2;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: background 0.3s ease;
+  display: inline-block;
+}
+
+.read-more-btn:hover {
+  background: #a855f7;
+}
+
+/* Single Blog Page */
+.blog-single-title {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.blog-single-image.large {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+}
+
+.blog-content {
+  font-size: 1.05rem;
+  color: #ddd;
+  line-height: 1.9;
+  padding-bottom: 2rem;
+  white-space: pre-line;
+}
+
+.back-to-blog {
+  color: #bb86fc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.back-to-blog:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Error Message */
+.blog-error {
+  text-align: center;
+  color: #ff4d4d;
+  padding: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Comment Section */
+.comment-section {
+  background: #181818;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 3rem;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.comment-section h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #bb86fc;
+}
+
+/* Comment Textarea */
+.comment-section textarea,
+.comment-textarea {
+  width: 100%;
+  height: 120px;
+  padding: 1rem;
+  background: #222;
+  border: 1px solid #333;
+  color: #eee;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  resize: none; /* ✅ disable resizing */
+  transition: border 0.3s ease;
+  box-sizing: border-box;
+}
+
+.comment-section textarea:focus,
+.comment-textarea:focus {
+  border-color: #a855f7;
+  outline: none;
+}
+
+/* Submit Button */
+.submit-comment {
+  background: #a855f7;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-comment:hover {
+  background: #9333ea;
+}
+
+/* Comments Wrapper */
+.comments-wrapper {
+  margin-top: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.comments-wrapper h4 {
+  font-size: 1.2rem;
+  color: #bb86fc;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+/* Individual Comment */
+.review-box {
+  background: #1c1c1c;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 12px rgba(138, 43, 226, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.review-box:hover {
+  transform: translateY(-2px);
+}
+
+.review-user {
+  color: #a855f7;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.comment-text {
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}

@@ -236,3 +236,7 @@
     padding: 1rem 0.5rem;
   }
 }
+.wishlist-btn.in-wishlist {
+  background-color: #b00020;
+  color: white;
+}

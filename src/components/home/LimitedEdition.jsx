@@ -1,28 +1,27 @@
-// components/pages/BestSellers.jsx
 import React, { useEffect, useState } from "react";
 import ProductCard from "../shop/ProductCard";
 import { BASE_URL } from "../../api/config";
-import "./bestSellers.css";
+import "./limitedEdition.css";
 
-const BestSellers = () => {
+const LimitedEdition = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchBestSellers = async () => {
+    const fetchLimitedEdition = async () => {
       try {
-        const res = await fetch(`${BASE_URL}/api/products/best-sellers`);
+        const res = await fetch(`${BASE_URL}/api/products/limited-edition`);
         const data = await res.json();
         setProducts(data.products || []);
-      } catch (error) {
-        console.error("Error fetching best sellers:", error);
+      } catch (err) {
+        console.error("Error fetching limited edition:", err);
       }
     };
-    fetchBestSellers();
+    fetchLimitedEdition();
   }, []);
 
   return (
-    <div className="best-sellers-section">
-      <h2 className="gradient-text">Best Sellers</h2>
+    <div className="limited-edition-section">
+      <h2 className="gradient-text">Limited Edition</h2>
       <div className="product-grid seven-column-grid">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
@@ -32,4 +31,4 @@ const BestSellers = () => {
   );
 };
 
-export default BestSellers;
+export default LimitedEdition;

@@ -28,82 +28,43 @@ function Hero() {
 
   return (
     <div className="hero">
-      <div className="innerHero">
-        <div className="innerBlock">
-          <span className="heroSpan">
-            <div className="heroText">
-              <div>
+      <div className="hero-content">
+        <div className="hero-menu">
+          <ul>
+            {[
+              "Shop by Design",
+              "Culture & Themes",
+              "Funny & Relatable",
+              "Occasions & Holidays",
+              "Gifts by Recipient",
+            ].map((category, idx) => (
+              <li key={idx} className="megaMenu">
+                {category}
                 <ul>
-                  <li className="megaMenu">
-                    Shop by Design
-                    <ul>
-                      <li>hello</li>
-                      <li>hello1</li>
-                      <li>hello2</li>
-                      <li>hello3</li>
-                      <li>hello4</li>
-                    </ul>
-                  </li>
-                  <li className="megaMenu">
-                    Culture & Themes
-                    <ul>
-                      <li>hello</li>
-                      <li>hello1</li>
-                      <li>hello2</li>
-                      <li>hello3</li>
-                      <li>hello4</li>
-                    </ul>
-                  </li>
-                  <li className="megaMenu">
-                    Funny & Relatable
-                    <ul>
-                      <li>hello</li>
-                      <li>hello1</li>
-                      <li>hello2</li>
-                      <li>hello3</li>
-                      <li>hello4</li>
-                    </ul>
-                  </li>
-                  <li className="megaMenu">
-                    Occasions & Holidays
-                    <ul>
-                      <li>hello</li>
-                      <li>hello1</li>
-                      <li>hello2</li>
-                      <li>hello3</li>
-                      <li>hello4</li>
-                    </ul>
-                  </li>
-                  <li className="megaMenu">
-                    Gifts by Recipient
-                    <ul>
-                      <li>hello</li>
-                      <li>hello1</li>
-                      <li>hello2</li>
-                      <li>hello3</li>
-                      <li>hello4</li>
-                    </ul>
-                  </li>
+                  {["hello", "hello1", "hello2", "hello3", "hello4"].map(
+                    (item, i) => (
+                      <li key={i}>{item}</li>
+                    )
+                  )}
                 </ul>
-              </div>
-              <div>
-                <button>Shpw Now</button>
-              </div>
-            </div>
-          </span>
-          <span className="heroSpan">
-            <img
-              src={images[currentIndex]}
-              alt={`Slide ${currentIndex + 1}`}
-              className="carousel-image "
-            />
-            <button className="carousel-button prev" onClick={goToPrevious}>
-              ❮
-            </button>
-            <button className="carousel-button next" onClick={goToNext}>
-              ❯
-            </button>
-          </span>
+              </li>
+            ))}
+          </ul>
+          <button className="shop-btn">Shop Now</button>
+        </div>
+
+        <div className="hero-carousel">
+          <img
+            src={images[currentIndex]}
+            alt={`Slide ${currentIndex + 1}`}
+            className="carousel-image"
+          />
+          <button className="carousel-button prev" onClick={goToPrevious}>
+            ❮
+          </button>
+          <button className="carousel-button next" onClick={goToNext}>
+            ❯
+          </button>
         </div>
       </div>
     </div>

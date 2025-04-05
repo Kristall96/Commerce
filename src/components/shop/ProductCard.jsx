@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import StarRating from "../ui/StarRating";
-import { useCart } from "../context/CartContext"; // ✅ import
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 import "./productCard.css";
 
 const ProductCard = ({ product }) => {
@@ -11,9 +12,11 @@ const ProductCard = ({ product }) => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
-  const { addToCart } = useCart(); // ✅ access cart context
+  const { addToCart } = useCart();
+  const { wishlist, toggleWishlist } = useWishlist();
 
-  // ✅ Check if user already rated
+  const isInWishlist = wishlist.some((item) => item._id === product._id);
+
   useEffect(() => {
     if (user?._id && product.ratings?.length > 0) {
       const alreadyRated = product.ratings.some(
@@ -78,6 +81,21 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const handleToggleWishlist = async (e) => {
+    e.preventDefault();
+    if (!token) return alert("Please log in to use wishlist.");
+    try {
+      await toggleWishlist(product._id);
+      setFeedback(
+        isInWishlist ? "💔 Removed from wishlist" : "❤️ Added to wishlist"
+      );
+      setTimeout(() => setFeedback(""), 2500);
+    } catch (err) {
+      console.error("Wishlist error:", err);
+      setFeedback("❌ Wishlist error");
+    }
+  };
+
   return (
     <div className="product-card-wrapper">
       <Link to={`/product/${product._id}`} className="product-card-link">
@@ -97,7 +115,12 @@ const ProductCard = ({ product }) => {
           />
 
           <div className="product-actions" onClick={(e) => e.preventDefault()}>
-            <button className="wishlist-btn">♡ Wishlist</button>
+            <button
+              className={`wishlist-btn ${isInWishlist ? "in-wishlist" : ""}`}
+              onClick={handleToggleWishlist}
+            >
+              {isInWishlist ? "♥ Wishlist" : "♡ Wishlist"}
+            </button>
             <button className="cart-btn" onClick={handleAddToCart}>
               + Add to Cart
             </button>
