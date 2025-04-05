@@ -3,10 +3,9 @@ import "./hero.css";
 
 function Hero() {
   const images = [
-    "/banner/banner1.png",
-    "/banner/banner2.png",
-    "/banner/banner3.png",
-    "/banner/banner4.png",
+    "/banner/banner1.jpg",
+    "/banner/banner2.jpg",
+    "/banner/banner3.jpg",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
