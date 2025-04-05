@@ -261,3 +261,40 @@
   background: #a74fff;
   box-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
 }
+/* Mobile view (1 column) */
+@media (max-width: 768px) {
+  .shop-layout {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+    position: static;
+    box-shadow: none;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr; /* Single column */
+  }
+
+  .product-card {
+    max-height: none;
+  }
+}
+
+/* Tablet view (2 to 4 columns) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  }
+}
+
+/* Desktop and larger screens */
+@media (min-width: 1025px) {
+  .product-grid {
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+  }
+}

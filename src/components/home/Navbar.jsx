@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-import { ShoppingCart, Heart } from "lucide-react";
+import { ShoppingCart, Heart, Menu, X } from "lucide-react";
 import AccountModal from "./AccountModal";
 import "./Navbar.css";
 
@@ -12,22 +12,38 @@ function Navbar() {
   const { cart, addToCart, updateQuantity, removeFromCart, clearCart } =
     useCart();
   const { wishlist, toggleWishlist } = useWishlist();
+
   const [showModal, setShowModal] = useState(false);
   const [showCartPreview, setShowCartPreview] = useState(false);
   const [showWishlistPreview, setShowWishlistPreview] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const wishlistCount = wishlist.length;
 
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
   return (
     <>
       <nav className="navbar">
-        <span className="nav-logo">
-          <img className="logo" src="/logo.png" alt="Logo" />
-        </span>
+        {/* Hamburger */}
+        <div className="nav-left">
+          <div className="hamburger-menu" onClick={toggleMobileMenu}>
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </div>
+        </div>
 
-        <span>
-          <ul className="nav-links">
+        {/* Logo */}
+        <div className="nav-logo">
+          <Link to="/" onClick={closeMobileMenu}>
+            <img className="logo" src="/logo.png" alt="Logo" />
+          </Link>
+        </div>
+
+        {/* Center: Desktop Nav Links */}
+        <div className="nav-center">
+          <ul className="nav-links-desktop">
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -44,27 +60,27 @@ function Navbar() {
               <Link to="/blog">Blog</Link>
             </li>
           </ul>
-        </span>
+        </div>
 
-        <span className="nav-actions">
-          {user ? (
-            <div className="user-dropdown">
-              <button className="user-btn">
-                <Link to="/profile">{user.username}</Link>
-              </button>
-            </div>
-          ) : (
-            <button onClick={() => setShowModal(true)}>Account</button>
-          )}
+        {/* Actions */}
+        <div className="nav-actions">
+          <button
+            className="user-btn"
+            onClick={() => !user && setShowModal(true)}
+          >
+            <Link to={user ? "/profile" : "#"}>
+              {user ? user.username : "Account"}
+            </Link>
+          </button>
 
-          {/* Wishlist icon */}
+          {/* Wishlist */}
           <div
             className="cart-wrapper"
             onMouseEnter={() => setShowWishlistPreview(true)}
             onMouseLeave={() => setShowWishlistPreview(false)}
           >
             <div className="cart-icon">
-              <Heart size={22} />
+              <Heart size={20} />
               {wishlistCount > 0 && (
                 <span className="cart-count-badge">{wishlistCount}</span>
               )}
@@ -111,14 +127,14 @@ function Navbar() {
             )}
           </div>
 
-          {/* Cart icon */}
+          {/* Cart */}
           <div
             className="cart-wrapper"
             onMouseEnter={() => setShowCartPreview(true)}
             onMouseLeave={() => setShowCartPreview(false)}
           >
             <div className="cart-icon">
-              <ShoppingCart size={22} />
+              <ShoppingCart size={20} />
               {totalItems > 0 && (
                 <span className="cart-count-badge">{totalItems}</span>
               )}
@@ -173,8 +189,39 @@ function Navbar() {
               </div>
             )}
           </div>
-        </span>
+        </div>
       </nav>
+
+      {/* Mobile Nav */}
+      {isMobileMenuOpen && (
+        <ul className="nav-links-mobile">
+          <li>
+            <Link to="/" onClick={closeMobileMenu}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/shop" onClick={closeMobileMenu}>
+              Shop
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" onClick={closeMobileMenu}>
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" onClick={closeMobileMenu}>
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link to="/blog" onClick={closeMobileMenu}>
+              Blog
+            </Link>
+          </li>
+        </ul>
+      )}
 
       {showModal && <AccountModal onClose={() => setShowModal(false)} />}
     </>

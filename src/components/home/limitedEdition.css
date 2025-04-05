@@ -127,3 +127,7 @@
   color: inherit;
   display: block;
 }
+
+.gradient-text {
+  text-align: center;
+}

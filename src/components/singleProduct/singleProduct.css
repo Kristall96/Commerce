@@ -42,9 +42,9 @@
 .main-product-image {
   width: 100%;
   max-width: 500px;
-  height: auto;
+  height: 360px; /* fixed consistent height */
   border-radius: 16px;
-  object-fit: contain;
+  object-fit: cover; /* fills area while maintaining aspect ratio */
   box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
   transition: transform 0.3s ease;
   cursor: default;
